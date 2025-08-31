@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["minecraft:netherite_pickaxe"] }] }
+    },
+    "has_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["minecraft:netherite_axe"] }] }
+    },
+    "has_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["minecraft:netherite_shovel"] }] }
+    }
+  },
+  "requirements": [["has_pick", "has_axe", "has_shovel"]],
+  "rewards": { "recipes": ["egtools:netherite_paxel"] }
+}

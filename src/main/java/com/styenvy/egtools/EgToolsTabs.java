@@ -20,14 +20,20 @@ public final class EgToolsTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EGTOOLS_TAB = REGISTER.register("egtools",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.egtools"))
-                    .icon(() -> EgToolsItems.IRON_PAXEL.get().getDefaultInstance())
-                    .displayItems((params, out) -> out.accept(EgToolsItems.IRON_PAXEL.get()))
+                    .icon(() -> EgToolsItems.DIAMOND_PAXEL.get().getDefaultInstance())
+                    .displayItems((params, out) -> {
+                        out.accept(EgToolsItems.IRON_PAXEL.get());
+                        out.accept(EgToolsItems.DIAMOND_PAXEL.get());
+                        out.accept(EgToolsItems.NETHERITE_PAXEL.get());
+                    })
                     .build());
 
     @SubscribeEvent
     public static void onBuildCreativeTabs(BuildCreativeModeTabContentsEvent e) {
         if (e.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES)) {
             e.accept(EgToolsItems.IRON_PAXEL.get());
+            e.accept(EgToolsItems.DIAMOND_PAXEL.get());
+            e.accept(EgToolsItems.NETHERITE_PAXEL.get());
         }
     }
 }

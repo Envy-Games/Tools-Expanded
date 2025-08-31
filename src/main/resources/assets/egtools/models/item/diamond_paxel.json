@@ -3,9 +3,9 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "egtools:item/iron_paxel_handle",
-		"1": "egtools:item/iron_paxel_face",
-		"particle": "egtools:item/iron_paxel_face"
+		"0": "egtools:item/diamond_paxel_handle",
+		"1": "egtools:item/diamond_paxel_face",
+		"particle": "egtools:item/diamond_paxel_face"
 	},
 	"elements": [
 		{

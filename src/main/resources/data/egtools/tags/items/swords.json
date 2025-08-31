@@ -1,4 +1,6 @@
 {
   "replace": false,
-  "values": ["egtools:iron_paxel"]
+  "values": ["egtools:iron_paxel"],
+  "values": ["egtools:diamond_paxel"],
+  "values": ["egtools:netherite_paxel"]
 }
