@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["minecraft:iron_pickaxe"] }] }
+    },
+    "has_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["minecraft:iron_axe"] }] }
+    },
+    "has_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["minecraft:iron_shovel"] }] }
+    }
+  },
+  "requirements": [["has_pick", "has_axe", "has_shovel"]],
+  "rewards": { "recipes": ["egtools:iron_paxel"] }
+}
