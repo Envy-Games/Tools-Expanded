@@ -69,12 +69,8 @@ public class PaxelItem extends Item implements IItemExtension {
         if (tryModify(state, ctx, ItemAbilities.AXE_STRIP, SoundEvents.AXE_STRIP, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
         if (tryModify(state, ctx, ItemAbilities.AXE_SCRAPE, SoundEvents.AXE_SCRAPE, level, pos, stack, player, 3005)) return InteractionResult.sidedSuccess(level.isClientSide);
         if (tryModify(state, ctx, ItemAbilities.AXE_WAX_OFF, SoundEvents.AXE_WAX_OFF, level, pos, stack, player, 3004)) return InteractionResult.sidedSuccess(level.isClientSide);
-
         if (tryModify(state, ctx, ItemAbilities.SHOVEL_FLATTEN, SoundEvents.SHOVEL_FLATTEN, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
-
         if (tryModify(state, ctx, ItemAbilities.HOE_TILL, SoundEvents.HOE_TILL, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
-
-        // Shears-style block interactions
         if (tryModify(state, ctx, ItemAbilities.SHEARS_CARVE, SoundEvents.PUMPKIN_CARVE, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
         if (tryModify(state, ctx, ItemAbilities.SHEARS_DISARM, null, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide); // silent disarm
         if (tryModify(state, ctx, ItemAbilities.SHEARS_HARVEST, SoundEvents.BEEHIVE_SHEAR, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
