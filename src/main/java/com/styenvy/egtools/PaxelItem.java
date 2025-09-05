@@ -1,6 +1,7 @@
 package com.styenvy.egtools;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -21,6 +23,8 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.extensions.IItemExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PaxelItem extends Item implements IItemExtension {
     private static final int DURABILITY_MULT = 6;       // ~6x tier base uses
@@ -66,14 +70,14 @@ public class PaxelItem extends Item implements IItemExtension {
         final ItemStack stack = ctx.getItemInHand();
         final Player player = ctx.getPlayer();
 
-        if (tryModify(state, ctx, ItemAbilities.AXE_STRIP, SoundEvents.AXE_STRIP, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
-        if (tryModify(state, ctx, ItemAbilities.AXE_SCRAPE, SoundEvents.AXE_SCRAPE, level, pos, stack, player, 3005)) return InteractionResult.sidedSuccess(level.isClientSide);
-        if (tryModify(state, ctx, ItemAbilities.AXE_WAX_OFF, SoundEvents.AXE_WAX_OFF, level, pos, stack, player, 3004)) return InteractionResult.sidedSuccess(level.isClientSide);
+        if (tryModify(state, ctx, ItemAbilities.AXE_STRIP,   SoundEvents.AXE_STRIP,     level, pos, stack, player, 0))    return InteractionResult.sidedSuccess(level.isClientSide);
+        if (tryModify(state, ctx, ItemAbilities.AXE_SCRAPE,  SoundEvents.AXE_SCRAPE,    level, pos, stack, player, 3005)) return InteractionResult.sidedSuccess(level.isClientSide);
+        if (tryModify(state, ctx, ItemAbilities.AXE_WAX_OFF, SoundEvents.AXE_WAX_OFF,   level, pos, stack, player, 3004)) return InteractionResult.sidedSuccess(level.isClientSide);
         if (tryModify(state, ctx, ItemAbilities.SHOVEL_FLATTEN, SoundEvents.SHOVEL_FLATTEN, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
-        if (tryModify(state, ctx, ItemAbilities.HOE_TILL, SoundEvents.HOE_TILL, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
-        if (tryModify(state, ctx, ItemAbilities.SHEARS_CARVE, SoundEvents.PUMPKIN_CARVE, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
-        if (tryModify(state, ctx, ItemAbilities.SHEARS_DISARM, null, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide); // silent disarm
-        if (tryModify(state, ctx, ItemAbilities.SHEARS_HARVEST, SoundEvents.BEEHIVE_SHEAR, level, pos, stack, player, 0)) return InteractionResult.sidedSuccess(level.isClientSide);
+        if (tryModify(state, ctx, ItemAbilities.HOE_TILL,    SoundEvents.HOE_TILL,      level, pos, stack, player, 0))    return InteractionResult.sidedSuccess(level.isClientSide);
+        if (tryModify(state, ctx, ItemAbilities.SHEARS_CARVE, SoundEvents.PUMPKIN_CARVE, level, pos, stack, player, 0))    return InteractionResult.sidedSuccess(level.isClientSide);
+        if (tryModify(state, ctx, ItemAbilities.SHEARS_DISARM, null,                    level, pos, stack, player, 0))     return InteractionResult.sidedSuccess(level.isClientSide); // silent disarm
+        if (tryModify(state, ctx, ItemAbilities.SHEARS_HARVEST, SoundEvents.BEEHIVE_SHEAR, level, pos, stack, player, 0))  return InteractionResult.sidedSuccess(level.isClientSide);
 
         return InteractionResult.PASS;
     }
@@ -116,10 +120,20 @@ public class PaxelItem extends Item implements IItemExtension {
         return this.tier.getEnchantmentValue();
     }
 
-
     @Override
     public boolean isValidRepairItem(@NotNull ItemStack toRepair, @NotNull ItemStack repairCandidate) {
         return this.tier.getRepairIngredient().test(repairCandidate);
+    }
+
+    /** Tooltip describing capabilities (mirrors Construction Hammer’s style). */
+    @Override
+    public void appendHoverText(@NotNull ItemStack stack,
+                                @NotNull Item.TooltipContext context,
+                                @NotNull List<Component> tooltip,
+                                @NotNull TooltipFlag flag) {
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip1"));
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip2"));
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip3"));
     }
 
     // --- Helpers ---

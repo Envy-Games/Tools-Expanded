@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:story/root",
+  "display": {
+    "icon": { "item": "minecraft:crafting_table" },
+    "title": "Workbench Ready",
+    "description": "You made a Crafting Table — Construction Hammer recipe unlocked.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "hidden": false
+  },
+  "criteria": {
+    "got_crafting_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": [ "minecraft:crafting_table" ] }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [ "got_crafting_table" ]
+  ],
+  "rewards": {
+    "recipes": [ "egtools:construction_hammer" ]
+  }
+}

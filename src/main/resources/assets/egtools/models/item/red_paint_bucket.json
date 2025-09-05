@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "egtools:item/red_paint_bucket"
+  }
+}

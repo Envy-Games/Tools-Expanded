@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:yellow_dye" },
+    { "item": "egtools:empty_paint_bucket" },
+    { "item": "minecraft:water_bucket" }
+  ],
+  "result": { "id": "egtools:yellow_paint_bucket", "count": 1 },
+  "show_notification": true
+}

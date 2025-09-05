@@ -1,0 +1,29 @@
+{
+  "parent": "egtools:discover_iron",
+  "display": {
+    "icon": { "id": "egtools:paint_brush" },
+    "title": { "text": "First Coat" },
+    "description": { "text": "Craft an Empty Paint Bucket to learn how to make a Paint Brush." },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "made_empty_paint_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": [ "egtools:empty_paint_bucket" ] }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [ "made_empty_paint_bucket" ]
+  ],
+  "rewards": {
+    "recipes": [ "egtools:paint_brush" ]
+  }
+}

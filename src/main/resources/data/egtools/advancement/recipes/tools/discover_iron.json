@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "minecraft:iron_ingot" },
+    "title": { "text": "A Shiny Discovery" },
+    "description": { "text": "Find iron ingots to learn how to shape an empty paint bucket." },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [ { "items": [ "minecraft:iron_ingot" ] } ]
+      }
+    }
+  },
+  "requirements": [ [ "has_iron" ] ],
+  "rewards": {
+    "recipes": [ "egtools:empty_paint_bucket" ]
+  }
+}
