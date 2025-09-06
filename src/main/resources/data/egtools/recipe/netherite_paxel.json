@@ -1,11 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["PAS"," # "," # "],
+  "pattern": ["PAS", " H ", " W "],
   "key": {
     "P": { "item": "minecraft:netherite_pickaxe" },
     "A": { "item": "minecraft:netherite_axe" },
     "S": { "item": "minecraft:netherite_shovel" },
-    "#": { "item": "minecraft:stick" }
+    "H": { "item": "minecraft:netherite_hoe" },
+    "W": { "item": "minecraft:netherite_sword" }
   },
   "result": { "id": "egtools:netherite_paxel", "count": 1 }
 }

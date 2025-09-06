@@ -1,11 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["PAS"," # "," # "],
+  "pattern": ["PAS", " H ", " W "],
   "key": {
     "P": { "item": "minecraft:iron_pickaxe" },
     "A": { "item": "minecraft:iron_axe" },
     "S": { "item": "minecraft:iron_shovel" },
-    "#": { "item": "minecraft:stick" }
+    "H": { "item": "minecraft:iron_hoe" },
+    "W": { "item": "minecraft:iron_sword" }
   },
   "result": { "id": "egtools:iron_paxel", "count": 1 }
 }

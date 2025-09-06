@@ -1,11 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["PAS"," # "," # "],
+  "pattern": ["PAS", " H ", " W "],
   "key": {
     "P": { "item": "minecraft:diamond_pickaxe" },
     "A": { "item": "minecraft:diamond_axe" },
     "S": { "item": "minecraft:diamond_shovel" },
-    "#": { "item": "minecraft:stick" }
+    "H": { "item": "minecraft:diamond_hoe" },
+    "W": { "item": "minecraft:diamond_sword" }
   },
   "result": { "id": "egtools:diamond_paxel", "count": 1 }
 }
