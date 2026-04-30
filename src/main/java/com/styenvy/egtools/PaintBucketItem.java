@@ -1,5 +1,6 @@
 package com.styenvy.egtools;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -34,9 +35,9 @@ public class PaintBucketItem extends Item {
                                 @NotNull Item.TooltipContext context,
                                 @NotNull List<Component> tooltip,
                                 @NotNull TooltipFlag flag) {
-        tooltip.add(Component.translatable("item.egtools.paint_bucket.tooltip")); // "§7Contains 32 paints"
+        tooltip.add(Component.translatable("item.egtools.paint_bucket.tooltip").withStyle(ChatFormatting.GRAY));
         int remaining = getRemaining(stack);
-        tooltip.add(Component.literal("§7Remaining: " + remaining + " / " + MAX_PAINTS));
+        tooltip.add(Component.translatable("item.egtools.paint_bucket.remaining", remaining, MAX_PAINTS).withStyle(ChatFormatting.GRAY));
     }
 
     /**
@@ -58,7 +59,7 @@ public class PaintBucketItem extends Item {
         if (remaining > 0) {
             setRemaining(stack, remaining);
         } else {
-            // This was the last use → convert one to empty
+            // This was the last use; convert one to empty.
             convertOneToEmpty(stack, player);
         }
     }

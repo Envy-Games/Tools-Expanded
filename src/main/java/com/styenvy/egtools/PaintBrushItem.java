@@ -1,5 +1,6 @@
 package com.styenvy.egtools;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -66,14 +67,14 @@ public class PaintBrushItem extends Item {
         if (uses > 0) {
             DyeColor color = getPaintColor(stack);
             if (color != null) {
-                tooltip.add(Component.literal("§7Paint: " + formatColorName(color)));
-                tooltip.add(Component.literal("§7Uses: " + uses + "/" + MAX_PAINT_USES));
+                tooltip.add(Component.translatable("item.egtools.paint_brush.tooltip.paint", formatColorName(color)).withStyle(ChatFormatting.GRAY));
+                tooltip.add(Component.translatable("item.egtools.paint_brush.tooltip.uses", uses, MAX_PAINT_USES).withStyle(ChatFormatting.GRAY));
             }
         } else {
-            tooltip.add(Component.literal("§7No paint loaded"));
-            tooltip.add(Component.literal("§7Combine with paint bucket to charge"));
+            tooltip.add(Component.translatable("item.egtools.paint_brush.tooltip.empty").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("item.egtools.paint_brush.tooltip.charge").withStyle(ChatFormatting.GRAY));
         }
-        tooltip.add(Component.literal("§8Left-click or Shift+Left-click to paint blocks"));
+        tooltip.add(Component.translatable("item.egtools.paint_brush.tooltip.use").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     /* =========================
@@ -103,7 +104,7 @@ public class PaintBrushItem extends Item {
 
         int uses = getPaintUses(brushStack);
         if (uses <= 0) {
-            player.displayClientMessage(Component.literal("§cBrush has no paint!"), true);
+            player.displayClientMessage(Component.translatable("message.egtools.paint_brush.no_paint").withStyle(ChatFormatting.RED), true);
             return;
         }
 
@@ -112,18 +113,18 @@ public class PaintBrushItem extends Item {
 
         Level level = player.level();
 
-        // 🔑 Normalize bed FOOT -> HEAD before painting
+        // Normalize bed foot -> head before painting.
         BlockPos pos = normalizeToBedHead(level, e.getPos());
 
         // Now check paintability/paint using the normalized position
         if (!PaintVariantRegistry.isPaintable(level.getBlockState(pos).getBlock())) {
-            player.displayClientMessage(Component.literal("§cThis block cannot be painted"), true);
+            player.displayClientMessage(Component.translatable("message.egtools.paint_brush.not_paintable").withStyle(ChatFormatting.RED), true);
             return;
         }
 
         boolean painted = PaintVariantRegistry.paint(level, pos, color);
         if (!painted) {
-            player.displayClientMessage(Component.literal("§eBlock is already this color"), true);
+            player.displayClientMessage(Component.translatable("message.egtools.paint_brush.same_color").withStyle(ChatFormatting.YELLOW), true);
             return;
         }
 

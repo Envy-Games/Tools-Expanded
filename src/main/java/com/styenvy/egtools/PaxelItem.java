@@ -1,6 +1,7 @@
 package com.styenvy.egtools;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -125,15 +126,16 @@ public class PaxelItem extends Item implements IItemExtension {
         return this.tier.getRepairIngredient().test(repairCandidate);
     }
 
-    /** Tooltip describing capabilities (mirrors Construction Hammer’s style). */
+    /** Tooltip describing capabilities. */
     @Override
     public void appendHoverText(@NotNull ItemStack stack,
                                 @NotNull Item.TooltipContext context,
                                 @NotNull List<Component> tooltip,
                                 @NotNull TooltipFlag flag) {
-        tooltip.add(Component.translatable("item.egtools.paxel.tooltip1"));
-        tooltip.add(Component.translatable("item.egtools.paxel.tooltip2"));
-        tooltip.add(Component.translatable("item.egtools.paxel.tooltip3"));
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip2").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip3").withStyle(ChatFormatting.GOLD));
+        tooltip.add(Component.translatable("item.egtools.paxel.tooltip4").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     // --- Helpers ---

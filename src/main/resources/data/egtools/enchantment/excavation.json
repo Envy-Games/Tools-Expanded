@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.egtools.excavation"
+  },
+  "effects": {
+    "egtools:mining_area": {
+      "radius": 1
+    }
+  },
+  "exclusive_set": "#egtools:exclusive_set/area_mining",
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 18,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#egtools:enchantable/area_mining",
+  "weight": 5
+}

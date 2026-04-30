@@ -157,7 +157,7 @@ public final class PaintVariantRegistry {
                         m.invoke(shulkerNew, customName);
                         named = true;
                     } catch (Throwable ignore) {
-                        // fallback: load only the CustomName but this can reset inventory → we'll reapply items after
+                        // Fallback: load only the CustomName; inventory is reapplied afterwards.
                         var tag = new net.minecraft.nbt.CompoundTag();
                         tag.putString(
                                 "CustomName",

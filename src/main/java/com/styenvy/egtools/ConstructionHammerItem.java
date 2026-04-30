@@ -1,6 +1,7 @@
 package com.styenvy.egtools;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -170,9 +171,9 @@ public class ConstructionHammerItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, List<Component> tooltip, @NotNull TooltipFlag flag) {
-        tooltip.add(Component.translatable("item.egtools.construction_hammer.tooltip1"));
-        tooltip.add(Component.translatable("item.egtools.construction_hammer.tooltip2"));
-        tooltip.add(Component.translatable("item.egtools.construction_hammer.tooltip3"));
+        tooltip.add(Component.translatable("item.egtools.construction_hammer.tooltip1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.egtools.construction_hammer.tooltip2").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.egtools.construction_hammer.tooltip3").withStyle(ChatFormatting.GOLD));
     }
 
     @Override

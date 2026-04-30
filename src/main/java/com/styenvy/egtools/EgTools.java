@@ -16,6 +16,7 @@ public class EgTools {
         EgToolsItems.REGISTER.register(modEventBus);
         EgToolsTabs.REGISTER.register(modEventBus);
         EgToolsRecipeSerializers.REGISTER.register(modEventBus);
+        EgToolsEnchantmentEffectComponents.REGISTER.register(modEventBus);
 
         LOGGER.info("EgTools mod initialized!");
     }

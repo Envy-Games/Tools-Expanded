@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.egtools.quarrying"
+  },
+  "effects": {
+    "egtools:mining_area": {
+      "radius": 2
+    }
+  },
+  "exclusive_set": "#egtools:exclusive_set/area_mining",
+  "max_cost": {
+    "base": 80,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 32,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#egtools:enchantable/area_mining",
+  "weight": 2
+}
