@@ -1,0 +1,61 @@
+package com.styenvy.egtools.data;
+
+import com.styenvy.egtools.EgTools;
+import com.styenvy.egtools.EgToolsItems;
+import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+
+public class EgToolsLanguageProvider extends LanguageProvider {
+    public EgToolsLanguageProvider(PackOutput output) {
+        super(output, EgTools.MODID, "en_us");
+    }
+
+    @Override
+    protected void addTranslations() {
+        addItem(EgToolsItems.IRON_PAXEL, "Iron Paxel");
+        addItem(EgToolsItems.DIAMOND_PAXEL, "Diamond Paxel");
+        addItem(EgToolsItems.NETHERITE_PAXEL, "Netherite Paxel");
+        addItem(EgToolsItems.CONSTRUCTION_HAMMER, "Construction Hammer");
+        addItem(EgToolsItems.PAINT_BRUSH, "Paint Brush");
+        addItem(EgToolsItems.EMPTY_PAINT_BUCKET, "Empty Paint Bucket");
+        addItem(EgToolsItems.WHITE_PAINT_BUCKET, "White Paint Bucket");
+        addItem(EgToolsItems.LIGHT_GRAY_PAINT_BUCKET, "Light Gray Paint Bucket");
+        addItem(EgToolsItems.GRAY_PAINT_BUCKET, "Gray Paint Bucket");
+        addItem(EgToolsItems.BLACK_PAINT_BUCKET, "Black Paint Bucket");
+        addItem(EgToolsItems.BROWN_PAINT_BUCKET, "Brown Paint Bucket");
+        addItem(EgToolsItems.RED_PAINT_BUCKET, "Red Paint Bucket");
+        addItem(EgToolsItems.ORANGE_PAINT_BUCKET, "Orange Paint Bucket");
+        addItem(EgToolsItems.YELLOW_PAINT_BUCKET, "Yellow Paint Bucket");
+        addItem(EgToolsItems.LIME_PAINT_BUCKET, "Lime Paint Bucket");
+        addItem(EgToolsItems.GREEN_PAINT_BUCKET, "Green Paint Bucket");
+        addItem(EgToolsItems.CYAN_PAINT_BUCKET, "Cyan Paint Bucket");
+        addItem(EgToolsItems.LIGHT_BLUE_PAINT_BUCKET, "Light Blue Paint Bucket");
+        addItem(EgToolsItems.BLUE_PAINT_BUCKET, "Blue Paint Bucket");
+        addItem(EgToolsItems.PURPLE_PAINT_BUCKET, "Purple Paint Bucket");
+        addItem(EgToolsItems.MAGENTA_PAINT_BUCKET, "Magenta Paint Bucket");
+        addItem(EgToolsItems.PINK_PAINT_BUCKET, "Pink Paint Bucket");
+
+        add("itemGroup.egtools", "Tools Expanded");
+        add("item.egtools.construction_hammer.tooltip1", "Left-Click: Cycle block variants forward");
+        add("item.egtools.construction_hammer.tooltip2", "Shift+Left-Click: Cycle block variants backward");
+        add("item.egtools.construction_hammer.tooltip3", "Cycles through building block variants");
+        add("item.egtools.paxel.tooltip1", "Acts as a pickaxe, axe, shovel, hoe, shears & sword");
+        add("item.egtools.paxel.tooltip2", "Right-Click: strip/scrape/wax, flatten/till, carve/disarm/shear");
+        add("item.egtools.paxel.tooltip3", "Can perform sword sweep attacks");
+        add("item.egtools.paxel.tooltip4", "Supports pickaxe mining enchantments");
+        add("item.egtools.paint_bucket.tooltip", "Contains 32 paints");
+        add("item.egtools.paint_bucket.remaining", "Remaining: %s / %s");
+        add("item.egtools.paint_brush.tooltip.paint", "Paint: %s");
+        add("item.egtools.paint_brush.tooltip.uses", "Uses: %s / %s");
+        add("item.egtools.paint_brush.tooltip.empty", "No paint loaded");
+        add("item.egtools.paint_brush.tooltip.charge", "Combine with paint bucket to charge");
+        add("item.egtools.paint_brush.tooltip.use", "Left-click to paint blocks");
+        add("message.egtools.paint_brush.no_paint", "Brush has no paint!");
+        add("message.egtools.paint_brush.not_paintable", "This block cannot be painted");
+        add("message.egtools.paint_brush.same_color", "Block is already this color");
+        add("enchantment.egtools.excavation", "Excavation");
+        add("enchantment.egtools.quarrying", "Quarrying");
+        add("enchantment.egtools.auto_smelt", "Auto Smelt");
+        add("jei.egtools.paint_brush.info", "Combine a paint brush with any paint bucket in a crafting grid to load paint. JEI displays every paint color as a rotating shapeless recipe.");
+    }
+}

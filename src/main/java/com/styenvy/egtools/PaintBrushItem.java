@@ -7,7 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -83,23 +82,15 @@ public class PaintBrushItem extends Item {
     @SubscribeEvent
     public static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock e) {
         Player player = e.getEntity();
-        ItemStack heldMain = player.getMainHandItem();
-        ItemStack heldOff = player.getOffhandItem();
-
-        ItemStack brushStack = ItemStack.EMPTY;
-        InteractionHand brushHand = null;
-
-        if (heldMain.getItem() instanceof PaintBrushItem) {
-            brushStack = heldMain;
-            brushHand = InteractionHand.MAIN_HAND;
-        } else if (heldOff.getItem() instanceof PaintBrushItem) {
-            brushStack = heldOff;
-            brushHand = InteractionHand.OFF_HAND;
-        } else {
+        ItemStack brushStack = player.getMainHandItem();
+        if (!(brushStack.getItem() instanceof PaintBrushItem)) {
             return;
         }
 
         e.setCanceled(true);
+        if (e.getAction() != PlayerInteractEvent.LeftClickBlock.Action.START) {
+            return;
+        }
         if (player.level().isClientSide) return;
 
         int uses = getPaintUses(brushStack);
@@ -136,7 +127,7 @@ public class PaintBrushItem extends Item {
         }
 
         level.playSound(null, pos, SoundEvents.BRUSH_SAND_COMPLETED, SoundSource.PLAYERS, 0.8f, 1.1f);
-        player.swing(brushHand, true);
+        player.swing(e.getHand(), true);
     }
 
     /* =========================

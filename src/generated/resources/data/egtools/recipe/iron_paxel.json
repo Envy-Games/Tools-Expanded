@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_axe"
+    },
+    "H": {
+      "item": "minecraft:iron_hoe"
+    },
+    "P": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "S": {
+      "item": "minecraft:iron_shovel"
+    },
+    "W": {
+      "item": "minecraft:iron_sword"
+    }
+  },
+  "pattern": [
+    "PAS",
+    " H ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "egtools:iron_paxel"
+  }
+}

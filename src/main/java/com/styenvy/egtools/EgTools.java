@@ -1,6 +1,7 @@
 package com.styenvy.egtools;
 
 import com.mojang.logging.LogUtils;
+import com.styenvy.egtools.data.EgToolsDataGenerators;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -17,6 +18,7 @@ public class EgTools {
         EgToolsTabs.REGISTER.register(modEventBus);
         EgToolsRecipeSerializers.REGISTER.register(modEventBus);
         EgToolsEnchantmentEffectComponents.REGISTER.register(modEventBus);
+        modEventBus.addListener(EgToolsDataGenerators::gatherData);
 
         LOGGER.info("EgTools mod initialized!");
     }

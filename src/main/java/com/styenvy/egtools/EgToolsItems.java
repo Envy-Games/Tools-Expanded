@@ -24,7 +24,7 @@ public final class EgToolsItems {
     public static final DeferredHolder<Item, PaxelItem> NETHERITE_PAXEL = REGISTER.register("netherite_paxel",
             () -> new PaxelItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1).fireResistant()));
 
-    // Construction Hammer: cycles through block variants when right-clicking
+    // Construction Hammer: cycles through block variants when left-clicking
     public static final DeferredHolder<Item, ConstructionHammerItem> CONSTRUCTION_HAMMER = REGISTER.register("construction_hammer",
             () -> new ConstructionHammerItem(new Item.Properties().stacksTo(1)));
 

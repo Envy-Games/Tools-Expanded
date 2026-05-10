@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:netherite_axe"
+    },
+    "H": {
+      "item": "minecraft:netherite_hoe"
+    },
+    "P": {
+      "item": "minecraft:netherite_pickaxe"
+    },
+    "S": {
+      "item": "minecraft:netherite_shovel"
+    },
+    "W": {
+      "item": "minecraft:netherite_sword"
+    }
+  },
+  "pattern": [
+    "PAS",
+    " H ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "egtools:netherite_paxel"
+  }
+}

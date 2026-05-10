@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -55,6 +56,12 @@ public class ConstructionHammerItem extends Item {
         BlockState currentState = level.getBlockState(pos);
         Block currentBlock = currentState.getBlock();
 
+        if (currentBlock instanceof DoorBlock && currentState.getValue(DoorBlock.HALF) == DoubleBlockHalf.UPPER) {
+            pos = pos.below();
+            currentState = level.getBlockState(pos);
+            currentBlock = currentState.getBlock();
+        }
+
         // Special handling for top slabs when cycling
         if (currentBlock instanceof SlabBlock && currentState.getValue(SlabBlock.TYPE) == SlabType.TOP) {
             BlockPos belowPos = pos.below();
@@ -65,8 +72,7 @@ public class ConstructionHammerItem extends Item {
                 // Move the slab down to bottom position
                 BlockState bottomSlab = currentState.setValue(SlabBlock.TYPE, SlabType.BOTTOM);
                 level.setBlock(belowPos, bottomSlab, 3);
-                level.setBlock(pos, level.getBlockState(pos.above()).isAir() ?
-                        net.minecraft.world.level.block.Blocks.AIR.defaultBlockState() : currentState, 3);
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                 return;
             }
             // If block below exists, don't cycle from top slab
@@ -88,6 +94,9 @@ public class ConstructionHammerItem extends Item {
 
         // Create the new block state
         BlockState newState = nextBlock.defaultBlockState();
+        if (currentState.getBlock() instanceof DoorBlock && !(newState.getBlock() instanceof DoorBlock)) {
+            removeOtherDoorHalf(level, pos, currentState);
+        }
 
         // Special handling for doors - need to place both halves
         if (newState.getBlock() instanceof DoorBlock) {
@@ -124,6 +133,20 @@ public class ConstructionHammerItem extends Item {
 
         // Set the new block
         level.setBlock(pos, newState, 3);
+    }
+
+    private void removeOtherDoorHalf(Level level, BlockPos lowerPos, BlockState lowerState) {
+        if (!(lowerState.getBlock() instanceof DoorBlock)) {
+            return;
+        }
+
+        BlockPos upperPos = lowerPos.above();
+        BlockState upperState = level.getBlockState(upperPos);
+        if (upperState.getBlock() == lowerState.getBlock()
+                && upperState.hasProperty(DoorBlock.HALF)
+                && upperState.getValue(DoorBlock.HALF) == DoubleBlockHalf.UPPER) {
+            level.setBlock(upperPos, Blocks.AIR.defaultBlockState(), 3);
+        }
     }
 
     /**
