@@ -35,6 +35,7 @@ public class PaintBrushRecipe extends CustomRecipe {
                 brush = stack;
             } else if (stack.getItem() instanceof PaintBucketItem) {
                 if (!bucket.isEmpty()) return false; // Multiple buckets
+                if (PaintBucketItem.getRemaining(stack) <= 0) return false;
                 bucket = stack;
             } else {
                 return false; // Unknown item
@@ -63,7 +64,7 @@ public class PaintBrushRecipe extends CustomRecipe {
 
         // Charge the brush with paint
         PaintBucketItem bucketItem = (PaintBucketItem) bucket.getItem();
-        PaintBrushItem.chargeBrush(brush, bucketItem.getColor(), PaintBucketItem.MAX_PAINTS);
+        PaintBrushItem.chargeBrush(brush, bucketItem.getColor(), PaintBucketItem.getRemaining(bucket));
 
         return brush;
     }

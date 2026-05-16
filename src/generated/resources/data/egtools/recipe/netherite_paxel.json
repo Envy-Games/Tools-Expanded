@@ -1,30 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "A": {
-      "item": "minecraft:netherite_axe"
-    },
-    "H": {
-      "item": "minecraft:netherite_hoe"
-    },
-    "P": {
-      "item": "minecraft:netherite_pickaxe"
-    },
-    "S": {
-      "item": "minecraft:netherite_shovel"
-    },
-    "W": {
-      "item": "minecraft:netherite_sword"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
   },
-  "pattern": [
-    "PAS",
-    " H ",
-    " W "
-  ],
+  "base": {
+    "item": "egtools:diamond_paxel"
+  },
   "result": {
     "count": 1,
     "id": "egtools:netherite_paxel"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
   }
 }

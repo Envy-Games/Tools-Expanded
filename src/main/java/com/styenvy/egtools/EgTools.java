@@ -3,7 +3,6 @@ package com.styenvy.egtools;
 import com.mojang.logging.LogUtils;
 import com.styenvy.egtools.data.EgToolsDataGenerators;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 
@@ -12,13 +11,13 @@ public class EgTools {
     public static final String MODID = "egtools";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public EgTools(IEventBus modEventBus, ModContainer modContainer) {
-        // Register all deferred registers
+    public EgTools(IEventBus modEventBus) {
         EgToolsMobEffects.REGISTER.register(modEventBus);
         EgToolsPotions.REGISTER.register(modEventBus);
         EgToolsItems.REGISTER.register(modEventBus);
         EgToolsTabs.REGISTER.register(modEventBus);
         EgToolsRecipeSerializers.REGISTER.register(modEventBus);
+        EgToolsDataComponents.REGISTER.register(modEventBus);
         EgToolsEnchantmentEffectComponents.REGISTER.register(modEventBus);
         modEventBus.addListener(EgToolsDataGenerators::gatherData);
         BedrockWeakeningHandler.register();

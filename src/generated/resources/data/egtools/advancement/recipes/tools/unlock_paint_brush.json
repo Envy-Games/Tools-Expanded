@@ -1,0 +1,39 @@
+{
+  "parent": "egtools:recipes/tools/discover_iron",
+  "criteria": {
+    "made_empty_paint_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "egtools:empty_paint_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "description": {
+      "translate": "advancement.egtools.unlock_paint_brush.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "egtools:paint_brush"
+    },
+    "title": {
+      "translate": "advancement.egtools.unlock_paint_brush.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_empty_paint_bucket"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "egtools:paint_brush",
+      "egtools:paint_brush_charging"
+    ]
+  }
+}

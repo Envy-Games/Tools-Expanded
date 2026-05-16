@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,9 +24,11 @@ import org.jetbrains.annotations.NotNull;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Paint Brush:
@@ -36,9 +39,9 @@ import java.util.List;
  */
 @EventBusSubscriber(modid = EgTools.MODID)
 public class PaintBrushItem extends Item {
-    private static final String NBT_PAINT_COLOR = "PaintColor";
-    private static final String NBT_PAINT_USES = "PaintUses";
-    public static final int MAX_PAINT_USES = 128; // 4 buckets worth
+    private static final String LEGACY_PAINT_COLOR = "PaintColor";
+    private static final String LEGACY_PAINT_USES = "PaintUses";
+    public static final int MAX_PAINT_USES = PaintBrushContents.MAX_USES;
 
     public PaintBrushItem(Properties props) {
         super(props.stacksTo(1));
@@ -120,10 +123,7 @@ public class PaintBrushItem extends Item {
         }
 
         if (!player.getAbilities().instabuild) {
-            setPaintUses(brushStack, uses - 1);
-            if (uses - 1 <= 0) {
-                clearPaint(brushStack);
-            }
+            setPaint(brushStack, color, uses - 1);
         }
 
         level.playSound(null, pos, SoundEvents.BRUSH_SAND_COMPLETED, SoundSource.PLAYERS, 0.8f, 1.1f);
@@ -144,75 +144,80 @@ public class PaintBrushItem extends Item {
         DyeColor currentColor = getPaintColor(brush);
         int currentUses = getPaintUses(brush);
 
-        // If different color, replace completely
-        if (currentColor != color && currentColor != null) {
-            setPaintColor(brush, color);
-            setPaintUses(brush, Math.min(addUses, MAX_PAINT_USES));
-        } else {
-            // Same color or empty, add uses
-            setPaintColor(brush, color);
-            setPaintUses(brush, Math.min(currentUses + addUses, MAX_PAINT_USES));
-        }
+        int uses = currentColor == color ? currentUses + addUses : addUses;
+        setPaint(brush, color, uses);
     }
 
     /* =========================
        Data storage helpers
        ========================= */
 
-    private static DyeColor getPaintColor(ItemStack stack) {
-        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        if (data == null) return null;
-        CompoundTag tag = data.copyTag();
-        if (!tag.contains(NBT_PAINT_COLOR)) return null;
-        String colorName = tag.getString(NBT_PAINT_COLOR);
-        try {
-            return DyeColor.valueOf(colorName);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
+    @Nullable
+    private static PaintBrushContents getPaintContents(ItemStack stack) {
+        PaintBrushContents contents = stack.get(EgToolsDataComponents.PAINT_BRUSH_CONTENTS.get());
+        return contents != null ? contents : getLegacyPaintContents(stack);
     }
 
-    private static void setPaintColor(ItemStack stack, DyeColor color) {
-        CompoundTag tag;
-        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        if (data == null) tag = new CompoundTag();
-        else tag = data.copyTag();
-        tag.putString(NBT_PAINT_COLOR, color.name());
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+    private static DyeColor getPaintColor(ItemStack stack) {
+        PaintBrushContents contents = getPaintContents(stack);
+        return contents != null ? contents.color() : null;
     }
 
     private static int getPaintUses(ItemStack stack) {
+        PaintBrushContents contents = getPaintContents(stack);
+        return contents != null ? contents.uses() : 0;
+    }
+
+    private static void setPaint(ItemStack stack, DyeColor color, int uses) {
+        removeLegacyPaintData(stack);
+        if (uses <= 0) {
+            clearPaint(stack);
+            return;
+        }
+
+        stack.set(EgToolsDataComponents.PAINT_BRUSH_CONTENTS.get(), PaintBrushContents.of(color, uses));
+    }
+
+    @Nullable
+    private static PaintBrushContents getLegacyPaintContents(ItemStack stack) {
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        if (data == null) return 0;
+        if (data == null) {
+            return null;
+        }
+
         CompoundTag tag = data.copyTag();
-        return tag.getInt(NBT_PAINT_USES);
+        if (!tag.contains(LEGACY_PAINT_COLOR, Tag.TAG_STRING) || !tag.contains(LEGACY_PAINT_USES, Tag.TAG_INT)) {
+            return null;
+        }
+
+        DyeColor color = DyeColor.byName(tag.getString(LEGACY_PAINT_COLOR).toLowerCase(Locale.ROOT), null);
+        int uses = tag.getInt(LEGACY_PAINT_USES);
+        return color != null && uses > 0 ? PaintBrushContents.of(color, uses) : null;
     }
 
-    private static void setPaintUses(ItemStack stack, int uses) {
-        CompoundTag tag;
+    private static void removeLegacyPaintData(ItemStack stack) {
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        if (data == null) tag = new CompoundTag();
-        else tag = data.copyTag();
-        tag.putInt(NBT_PAINT_USES, Math.max(0, uses));
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-    }
+        if (data == null) {
+            return;
+        }
 
-    private static void clearPaint(ItemStack stack) {
-        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        if (data != null) {
-            CompoundTag tag = data.copyTag();
-            tag.remove(NBT_PAINT_COLOR);
-            tag.remove(NBT_PAINT_USES);
-            if (tag.isEmpty()) {
-                stack.remove(DataComponents.CUSTOM_DATA);
-            } else {
-                stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-            }
+        CompoundTag tag = data.copyTag();
+        tag.remove(LEGACY_PAINT_COLOR);
+        tag.remove(LEGACY_PAINT_USES);
+        if (tag.isEmpty()) {
+            stack.remove(DataComponents.CUSTOM_DATA);
+        } else {
+            stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         }
     }
 
+    private static void clearPaint(ItemStack stack) {
+        removeLegacyPaintData(stack);
+        stack.remove(EgToolsDataComponents.PAINT_BRUSH_CONTENTS.get());
+    }
+
     private static String formatColorName(DyeColor color) {
-        String name = color.name().toLowerCase().replace('_', ' ');
+        String name = color.getName().replace('_', ' ');
         String[] words = name.split(" ");
         StringBuilder result = new StringBuilder();
         for (String word : words) {

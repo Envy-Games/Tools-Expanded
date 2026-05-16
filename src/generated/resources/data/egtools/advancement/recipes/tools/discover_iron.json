@@ -1,0 +1,36 @@
+{
+  "criteria": {
+    "has_iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.egtools.discover_iron.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:iron_ingot"
+    },
+    "title": {
+      "translate": "advancement.egtools.discover_iron.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "egtools:empty_paint_bucket"
+    ]
+  }
+}

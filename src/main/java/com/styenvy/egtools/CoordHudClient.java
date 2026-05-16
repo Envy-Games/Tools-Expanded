@@ -10,16 +10,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import static net.minecraft.commands.Commands.literal;
 
-@EventBusSubscriber(modid = EgTools.MODID, value = Dist.CLIENT)
 public final class CoordHudClient {
     private static final ResourceLocation LAYER_ID = ResourceLocation.fromNamespaceAndPath(EgTools.MODID, "coordshud");
     private static final int BACKGROUND_COLOR = 0x7A1A0E04;
@@ -33,8 +29,7 @@ public final class CoordHudClient {
 
     private CoordHudClient() {}
 
-    @SubscribeEvent
-    public static void registerClientCommands(RegisterClientCommandsEvent event) {
+    static void registerClientCommands(RegisterClientCommandsEvent event) {
         event.getDispatcher().register(literal("coordshud")
                 .executes(context -> {
                     enabled = !enabled;
@@ -48,8 +43,7 @@ public final class CoordHudClient {
                 }));
     }
 
-    @SubscribeEvent
-    public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+    static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.HOTBAR, LAYER_ID, CoordHudClient::render);
     }
 

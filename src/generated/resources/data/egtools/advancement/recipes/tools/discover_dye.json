@@ -1,23 +1,35 @@
 {
-  "parent": "egtools:discover_iron",
-  "display": {
-    "icon": { "id": "minecraft:red_dye" },
-    "title": { "text": "Color Theory" },
-    "description": { "text": "Find any dye to learn paint mixing (and brush crafting)." },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
+  "parent": "egtools:recipes/tools/discover_iron",
   "criteria": {
     "has_any_dye": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [ { "tag": "minecraft:dyes" } ]
-      }
+        "items": [
+          {
+            "items": "#c:dyes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
-  "requirements": [ [ "has_any_dye" ] ],
+  "display": {
+    "description": {
+      "translate": "advancement.egtools.discover_dye.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:red_dye"
+    },
+    "title": {
+      "translate": "advancement.egtools.discover_dye.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_any_dye"
+    ]
+  ],
   "rewards": {
     "recipes": [
       "egtools:white_paint_bucket",

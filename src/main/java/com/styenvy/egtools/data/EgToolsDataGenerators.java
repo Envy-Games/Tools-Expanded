@@ -4,9 +4,11 @@ import com.styenvy.egtools.EgTools;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public final class EgToolsDataGenerators {
@@ -19,6 +21,8 @@ public final class EgToolsDataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeServer(), new EgToolsRecipeProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new AdvancementProvider(output, lookupProvider, existingFileHelper,
+                List.of(new EgToolsAdvancementProvider())));
         generator.addProvider(event.includeServer(), new EgToolsBlockTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new EgToolsItemTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeClient(), new EgToolsItemModelProvider(output, existingFileHelper));

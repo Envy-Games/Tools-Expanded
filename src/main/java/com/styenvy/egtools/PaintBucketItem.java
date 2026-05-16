@@ -17,7 +17,7 @@ import java.util.List;
 
 public class PaintBucketItem extends Item {
     public static final int MAX_PAINTS = 32;
-    private static final String KEY_REMAINING = "egtools_paints_remaining";
+    private static final String LEGACY_REMAINING = "egtools_paints_remaining";
 
     private final DyeColor color;
 
@@ -78,17 +78,40 @@ public class PaintBucketItem extends Item {
         }
     }
 
-    private static int getRemaining(ItemStack stack) {
+    public static int getRemaining(ItemStack stack) {
+        Integer remaining = stack.get(EgToolsDataComponents.PAINT_BUCKET_REMAINING.get());
+        if (remaining != null) {
+            return remaining;
+        }
+
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);
         if (data == null) return MAX_PAINTS;
         CompoundTag tag = data.copyTag();
-        return tag.contains(KEY_REMAINING, Tag.TAG_INT) ? tag.getInt(KEY_REMAINING) : MAX_PAINTS;
+        return tag.contains(LEGACY_REMAINING, Tag.TAG_INT) ? tag.getInt(LEGACY_REMAINING) : MAX_PAINTS;
     }
 
     private static void setRemaining(ItemStack stack, int value) {
+        removeLegacyRemaining(stack);
+        int remaining = Math.max(0, Math.min(MAX_PAINTS, value));
+        if (remaining >= MAX_PAINTS) {
+            stack.remove(EgToolsDataComponents.PAINT_BUCKET_REMAINING.get());
+        } else {
+            stack.set(EgToolsDataComponents.PAINT_BUCKET_REMAINING.get(), remaining);
+        }
+    }
+
+    private static void removeLegacyRemaining(ItemStack stack) {
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        CompoundTag tag = (data == null) ? new CompoundTag() : data.copyTag();
-        tag.putInt(KEY_REMAINING, Math.max(0, Math.min(MAX_PAINTS, value)));
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        if (data == null) {
+            return;
+        }
+
+        CompoundTag tag = data.copyTag();
+        tag.remove(LEGACY_REMAINING);
+        if (tag.isEmpty()) {
+            stack.remove(DataComponents.CUSTOM_DATA);
+        } else {
+            stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        }
     }
 }

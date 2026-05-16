@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:story/root",
+  "criteria": {
+    "got_crafting_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:crafting_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "description": {
+      "translate": "advancement.egtools.construction_hammer_unlock.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:crafting_table"
+    },
+    "title": {
+      "translate": "advancement.egtools.construction_hammer_unlock.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_crafting_table"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "egtools:construction_hammer"
+    ]
+  }
+}

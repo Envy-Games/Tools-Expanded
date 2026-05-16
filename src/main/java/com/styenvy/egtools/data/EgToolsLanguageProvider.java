@@ -45,9 +45,9 @@ public class EgToolsLanguageProvider extends LanguageProvider {
         add("item.egtools.construction_hammer.tooltip2", "Shift+Left-Click: Cycle block variants backward");
         add("item.egtools.construction_hammer.tooltip3", "Cycles through building block variants");
         add("item.egtools.paxel.tooltip1", "Acts as a pickaxe, axe, shovel, hoe, shears & sword");
-        add("item.egtools.paxel.tooltip2", "Right-Click: strip/scrape/wax, flatten/till, carve/disarm/shear");
+        add("item.egtools.paxel.tooltip2", "Right-Click: strip, scrape, unwax, flatten, douse, till, trim & shear");
         add("item.egtools.paxel.tooltip3", "Can perform sword sweep attacks");
-        add("item.egtools.paxel.tooltip4", "Supports pickaxe mining enchantments");
+        add("item.egtools.paxel.tooltip4", "Supports mining, durability & sword enchantments");
         add("item.egtools.paint_bucket.tooltip", "Contains 32 paints");
         add("item.egtools.paint_bucket.remaining", "Remaining: %s / %s");
         add("item.egtools.paint_brush.tooltip.paint", "Paint: %s");
@@ -58,6 +58,14 @@ public class EgToolsLanguageProvider extends LanguageProvider {
         add("message.egtools.paint_brush.no_paint", "Brush has no paint!");
         add("message.egtools.paint_brush.not_paintable", "This block cannot be painted");
         add("message.egtools.paint_brush.same_color", "Block is already this color");
+        add("advancement.egtools.discover_iron.title", "A Shiny Discovery");
+        add("advancement.egtools.discover_iron.description", "Find iron ingots to learn how to shape an empty paint bucket.");
+        add("advancement.egtools.discover_dye.title", "Color Theory");
+        add("advancement.egtools.discover_dye.description", "Find any dye to learn paint mixing.");
+        add("advancement.egtools.unlock_paint_brush.title", "First Coat");
+        add("advancement.egtools.unlock_paint_brush.description", "Craft an Empty Paint Bucket to learn how to make a Paint Brush.");
+        add("advancement.egtools.construction_hammer_unlock.title", "Workbench Ready");
+        add("advancement.egtools.construction_hammer_unlock.description", "You made a Crafting Table; Construction Hammer recipe unlocked.");
         add("enchantment.egtools.excavation", "Excavation");
         add("enchantment.egtools.quarrying", "Quarrying");
         add("enchantment.egtools.auto_smelt", "Auto Smelt");

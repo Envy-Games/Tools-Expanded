@@ -12,11 +12,13 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
@@ -57,8 +59,7 @@ public class EgToolsRecipeProvider extends RecipeProvider {
                 Items.IRON_SHOVEL, Items.IRON_HOE, Items.IRON_SWORD);
         paxel(recipeOutput, EgToolsItems.DIAMOND_PAXEL.get(), Items.DIAMOND_PICKAXE, Items.DIAMOND_AXE,
                 Items.DIAMOND_SHOVEL, Items.DIAMOND_HOE, Items.DIAMOND_SWORD);
-        paxel(recipeOutput, EgToolsItems.NETHERITE_PAXEL.get(), Items.NETHERITE_PICKAXE, Items.NETHERITE_AXE,
-                Items.NETHERITE_SHOVEL, Items.NETHERITE_HOE, Items.NETHERITE_SWORD);
+        netheritePaxel(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EgToolsItems.CONSTRUCTION_HAMMER.get())
                 .define('I', Items.IRON_BLOCK)
@@ -110,6 +111,19 @@ public class EgToolsRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_axe", has(axe))
                 .unlockedBy("has_shovel", has(shovel))
                 .save(recipeOutput);
+    }
+
+    private static void netheritePaxel(RecipeOutput recipeOutput) {
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.of(EgToolsItems.DIAMOND_PAXEL.get()),
+                        Ingredient.of(Items.NETHERITE_INGOT),
+                        RecipeCategory.TOOLS,
+                        EgToolsItems.NETHERITE_PAXEL.get()
+                )
+                .unlocks("has_diamond_paxel", has(EgToolsItems.DIAMOND_PAXEL.get()))
+                .unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(EgTools.MODID, "netherite_paxel"));
     }
 
     private static void paintBucket(RecipeOutput recipeOutput, PaintRecipe paintRecipe) {
