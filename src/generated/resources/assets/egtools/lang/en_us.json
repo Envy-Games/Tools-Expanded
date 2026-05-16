@@ -1,4 +1,5 @@
 {
+  "effect.egtools.bedrock_weakening": "Weakening",
   "enchantment.egtools.auto_smelt": "Auto Smelt",
   "enchantment.egtools.excavation": "Excavation",
   "enchantment.egtools.quarrying": "Quarrying",
@@ -38,8 +39,14 @@
   "item.egtools.red_paint_bucket": "Red Paint Bucket",
   "item.egtools.white_paint_bucket": "White Paint Bucket",
   "item.egtools.yellow_paint_bucket": "Yellow Paint Bucket",
+  "item.minecraft.lingering_potion.effect.weakening": "Lingering Potion of Weakening",
+  "item.minecraft.potion.effect.weakening": "Potion of Weakening",
+  "item.minecraft.splash_potion.effect.weakening": "Splash Potion of Weakening",
+  "item.minecraft.tipped_arrow.effect.weakening": "Arrow of Weakening",
   "itemGroup.egtools": "Tools Expanded",
   "jei.egtools.paint_brush.info": "Combine a paint brush with any paint bucket in a crafting grid to load paint. JEI displays every paint color as a rotating shapeless recipe.",
+  "jei.egtools.weakenable_bedrock.info": "Blocks in the egtools:weakenable_bedrock tag can be mined only while weakened by the splash potion. A netherite pickaxe or Netherite Paxel is required; Silk Touch drops one block, while Fortune has no effect.",
+  "jei.egtools.weakening_potion.info": "Brew with Awkward Potion and Crying Obsidian, then add Gunpowder for the throwable Splash Potion of Weakening. The splash weakens nearby blocks in the egtools:weakenable_bedrock tag for a short time.",
   "message.egtools.paint_brush.no_paint": "Brush has no paint!",
   "message.egtools.paint_brush.not_paintable": "This block cannot be painted",
   "message.egtools.paint_brush.same_color": "Block is already this color"

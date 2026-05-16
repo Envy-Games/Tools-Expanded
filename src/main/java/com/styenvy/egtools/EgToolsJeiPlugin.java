@@ -12,7 +12,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 
@@ -35,6 +38,14 @@ public final class EgToolsJeiPlugin implements IModPlugin {
         registration.addItemStackInfo(
                 EgToolsItems.PAINT_BRUSH.get().getDefaultInstance(),
                 Component.translatable("jei.egtools.paint_brush.info")
+        );
+        registration.addItemStackInfo(
+                weakeningPotionStacks(),
+                Component.translatable("jei.egtools.weakening_potion.info")
+        );
+        registration.addItemStackInfo(
+                Blocks.BEDROCK.asItem().getDefaultInstance(),
+                Component.translatable("jei.egtools.weakenable_bedrock.info")
         );
     }
 
@@ -99,5 +110,14 @@ public final class EgToolsJeiPlugin implements IModPlugin {
         ItemStack stack = EgToolsItems.PAINT_BRUSH.get().getDefaultInstance();
         PaintBrushItem.chargeBrush(stack, color, PaintBucketItem.MAX_PAINTS);
         return stack;
+    }
+
+    private static List<ItemStack> weakeningPotionStacks() {
+        return List.of(
+                PotionContents.createItemStack(Items.POTION, EgToolsPotions.WEAKENING),
+                PotionContents.createItemStack(Items.SPLASH_POTION, EgToolsPotions.WEAKENING),
+                PotionContents.createItemStack(Items.LINGERING_POTION, EgToolsPotions.WEAKENING),
+                PotionContents.createItemStack(Items.TIPPED_ARROW, EgToolsPotions.WEAKENING)
+        );
     }
 }

@@ -3,6 +3,8 @@ package com.styenvy.egtools;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -23,6 +25,7 @@ public final class EgToolsTabs {
                         out.accept(EgToolsItems.NETHERITE_PAXEL.get());
                         out.accept(EgToolsItems.CONSTRUCTION_HAMMER.get());
                         out.accept(EgToolsItems.PAINT_BRUSH.get());
+                        out.accept(PotionContents.createItemStack(Items.SPLASH_POTION, EgToolsPotions.WEAKENING));
                         // Empty bucket
                         out.accept(EgToolsItems.EMPTY_PAINT_BUCKET.get());
                         // Paint buckets (all colors)

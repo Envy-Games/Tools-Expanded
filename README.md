@@ -1,25 +1,38 @@
-
-Installation information
+Tools Expanded
 =======
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+Tools Expanded adds utility tools, paint tools, mining enchantments, and a throwable Potion of Weakening for temporarily mining bedrock.
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
-
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-Additional Resources: 
+Potion of Weakening
 ==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+
+The Splash Potion of Weakening temporarily weakens nearby blocks in the `egtools:weakenable_bedrock` block tag. While a tagged block is weakened, a player can mine it with a netherite pickaxe or Netherite Paxel. An unenchanted tool destroys the block without drops; Fortune has no effect; Silk Touch drops exactly one copy of the block during the weakening window.
+
+Brewing recipe:
+
+```
+Awkward Potion + Crying Obsidian -> Potion of Weakening
+Potion of Weakening + Gunpowder -> Splash Potion of Weakening
+```
+
+Weakening Tag Integration
+==========
+
+Other mods can opt their own bedrock-like blocks into the potion by adding them to the block tag:
+
+```
+egtools:weakenable_bedrock
+```
+
+Create a data file at `data/egtools/tags/block/weakenable_bedrock.json` in your mod or datapack:
+
+```json
+{
+  "replace": false,
+  "values": [
+    "yourmod:your_bedrock_block"
+  ]
+}
+```
+
+Tagged blocks become temporarily mineable when hit by the potion. They require a vanilla netherite pickaxe or Tools Expanded Netherite Paxel, drop nothing without Silk Touch, ignore Fortune, and drop the block item from `Block#asItem()` when mined with Silk Touch.

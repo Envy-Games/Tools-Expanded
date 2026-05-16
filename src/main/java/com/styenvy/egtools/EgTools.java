@@ -14,11 +14,14 @@ public class EgTools {
 
     public EgTools(IEventBus modEventBus, ModContainer modContainer) {
         // Register all deferred registers
+        EgToolsMobEffects.REGISTER.register(modEventBus);
+        EgToolsPotions.REGISTER.register(modEventBus);
         EgToolsItems.REGISTER.register(modEventBus);
         EgToolsTabs.REGISTER.register(modEventBus);
         EgToolsRecipeSerializers.REGISTER.register(modEventBus);
         EgToolsEnchantmentEffectComponents.REGISTER.register(modEventBus);
         modEventBus.addListener(EgToolsDataGenerators::gatherData);
+        BedrockWeakeningHandler.register();
 
         LOGGER.info("EgTools mod initialized!");
     }

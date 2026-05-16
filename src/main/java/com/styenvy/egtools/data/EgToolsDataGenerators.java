@@ -19,6 +19,7 @@ public final class EgToolsDataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeServer(), new EgToolsRecipeProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new EgToolsBlockTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new EgToolsItemTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeClient(), new EgToolsItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new EgToolsLanguageProvider(output));
